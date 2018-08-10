@@ -16,7 +16,8 @@ class ProductTemplateExt(models.Model):
 			rec = self.env['commission.line'].search([('product', '=', self.id)])
 			if rec:
 				rec.write({
-		    		'commission_id' : self.contractor.id
+					'commission' : self.commission,
+		    		'commission_id' : self.contractor.id,
 		    	})
 
 			else:
@@ -57,34 +58,33 @@ class AccountInvoiceExt(models.Model):
 
 	@api.model
 	def _cron_generate_vendor_bill(self):
-		pass
-	# 	record = self.env['res.partner'].search([
-	# 		('is_contractor','=',True),
-	# 		('supplier','=',True),
-	# 	])
+		print ('sssssssssssssssssssss')
+		record = self.env['res.partner'].search([
+			('is_contractor','=',True),
+			('supplier','=',True),
+		])
+		print(record)
 
-	# 	for rec in record:
-		
-	# 		invoice_line_ids = []
-	# 		loop = 0
-	# 		for line in rec.commission_qty_line:
-	# 			invoice_line_ids.append((0,loop,
-	# 				{
-	# 					'product_id' : line.product.id,
-	# 					'name' : line.product.name,
-	# 				}
-	# 			))
+		# for rec in record:
+		# 	invoice_line_ids = []
+		# 	loop = 0
+		# 	for line in rec.commission_qty_line:
+		# 		invoice_line_ids.append((0,loop,
+		# 			{
+		# 				'product_id' : line.product.id,
+		# 				'name' : line.product.name,
+		# 			}
+		# 		))
 
-	# 			loop = loop + 1
-	# 		print(invoice_line_ids)
-	# 	# 		print(loop)
-	# 		self.create({
-	# 			'partner_id' : rec.id,
-	# 			'type' : 'in_invoice',
-	# 			'invoice_line_ids' : invoice_line_ids
-	# 			})
-			# print(rec.name)
-			# print('dddddddddddddddddddddddddddddddddddddddddd')
+		# 		loop = loop + 1
+		# 	print(invoice_line_ids)
+		# 	self.create({
+		# 		'partner_id' : rec.id,
+		# 		'type' : 'in_invoice',
+		# 		'invoice_line_ids' : invoice_line_ids
+		# 		})
+		# 	print(rec.name)
+		# 	print('dddddddddddddddddddddddddddddddddddddddddd')
 
 class CommissionLine(models.Model):
 	_name = 'commission.line'
