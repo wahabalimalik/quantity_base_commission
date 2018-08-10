@@ -3,44 +3,6 @@
   <data>
 
     <!-- 
-      Product Template 
-    -->
-
-      <record model="ir.ui.view" id="quantity_base_commission.product_template_form_ext">
-        <field name="name">quantity_base_commission product_template_form_ext</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_only_form_view"/>
-        <field name="arch" type="xml">
-         
-          <xpath expr="//div[@name='standard_price_uom']" position="after">
-                <field name="commission"/>
-          </xpath>
-
-          <xpath expr="//field[@name='categ_id']" position="after">
-                <field name="contractor" options="{'no_create_edit': True}"/>
-          </xpath>
-        </field>
-      </record>
-
-    <!-- 
-      Product Product 
-    -->
-      <record model="ir.ui.view" id="quantity_base_commission.product_product_form_ext">
-        <field name="name">quantity_base_commission product_product_form_ext</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_normal_form_view"/>
-        <field name="arch" type="xml">
-          <xpath expr="//div[@name='standard_price_uom']" position="after">
-            <field name="commission"/>
-          </xpath>
-
-          <xpath expr="//field[@name='categ_id']" position="after">
-            <field name="contractor" options="{'no_create_edit': True}"/>
-          </xpath>
-        </field>
-      </record>
-
-    <!-- 
       Res Partner
     -->
 

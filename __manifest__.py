@@ -17,6 +17,7 @@
     'depends': ['base','sale','purchase'],
     'data': [
         'data/auto_vendor_bill.xml',
-        'views/views.xml',
+        'views/producttemplateext.xml',
+        'views/respartnerext.xml',
     ],
 }
