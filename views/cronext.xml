@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<flectra>
+	<data>
+		<!-- Scheduled Action -->
+		<menuitem 
+			name = "Scheduled Actions" 
+			id = "quantity_base_commission.scheduled_action"
+			action = "base.ir_cron_act"
+		    sequence = '16'
+		    parent="purchase.menu_procurement_management"
+		/>
+	</data>
+</flectra>

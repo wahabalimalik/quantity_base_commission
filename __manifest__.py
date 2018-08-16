@@ -19,5 +19,6 @@
         'data/auto_vendor_bill.xml',
         'views/producttemplateext.xml',
         'views/respartnerext.xml',
+        'views/cronext.xml'
     ],
 }
