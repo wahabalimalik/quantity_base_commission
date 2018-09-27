@@ -17,6 +17,7 @@ class AccountInvoiceExt(models.Model):
 
 	@api.multi
 	def action_invoice_open(self):
+		print('ddddddddddddddddddd')
 		for rec in self.invoice_line_ids:
 			rec.product_id.contractor.commission_qty_line.create({
 				'invoice' : self.id,

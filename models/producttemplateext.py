@@ -23,29 +23,35 @@ class ProductTemplateExt(models.Model):
 	commission = fields.Float("Raising Mates PR")
 	contractor = fields.Many2one('res.partner', string='Contractor' , domain=[('is_contractor', '=', True)])
 
+	@api.model
+	def create(self, val):
+		res = super(ProductTemplateExt,self).create(val)
+
+		product = self.env['product.product'].search([('product_tmpl_id','=',res.id)])
+
+		resc = self.env['commission.line'].search([('product', '=', product.id)])
+
+		if not resc:
+			rec = self.env['res.partner']
+			rec.commission_line.create({
+				'product' : product.id,
+				'commission' : res.commission,
+				'commission_id' : res.contractor.id,
+			})
+		return res
+
 	@api.multi
 	def write(self, val):
 		res = super(ProductTemplateExt,self).write(val)
+
 		product = self.env['product.product'].search([('product_tmpl_id','=',self.id)])
 
 		rec = self.env['commission.line'].search([('product', '=', product.id)])
 
-		# for Edit Opration
 		if rec:
 			rec.write({
 				'commission' : self.commission,
-	    		'commission_id' : self.contractor.id,
-	    	})
-		# for Create Oprations
-		else:
-			resc = self.env['commission.line'].search([('product', '=', product.id)])
-
-			if not resc:
-				rec = self.env['res.partner'].search([('id', '=', self.contractor.id)])
-				rec.commission_line.create({
-					'product' : product.id,
-					'commission' : self.commission,
-					'commission_id' : self.contractor.id,
-				})
+				'commission_id' : self.contractor.id,
+			})
 
 		return res
